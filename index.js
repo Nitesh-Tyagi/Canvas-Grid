@@ -4,7 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var off = 'rgb(25,25,25)', on = 'rgb(70,70,70)';
 var nH = 0, nW = 0;
-var w = 12, g = 4;
+var w = 4, g = 2;
 var iX = 0, iY = 0;
 var arr;
 
@@ -145,7 +145,7 @@ document.addEventListener("keypress", function(event) {
     if(event.keyCode == 32) {
         console.log("TOGGLE : ",toggle);
         if(toggle) {
-            timer = setInterval(updateArray,500);
+            timer = setInterval(updateArray,100);
             document.body.style.backgroundColor = 'rgb(0,0,0)';
         }
         else {
