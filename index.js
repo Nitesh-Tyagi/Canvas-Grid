@@ -127,8 +127,8 @@ canvas.addEventListener('click', function(event) {
     var x = event.x;
     var y = event.y;
 
-    var ix = Math.ceil(x/(w+g))-1;
-    var iy = Math.ceil(y/(w+g));
+    var ix = Math.ceil((x+g-iX)/(w+g));
+    var iy = Math.ceil((y+g-iY)/(w+g));
 
     arr[iy][ix].state = 1-arr[iy][ix].state;
     arr[iy][ix].next = 2;
