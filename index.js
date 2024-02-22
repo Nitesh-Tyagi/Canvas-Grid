@@ -14,6 +14,7 @@ class Cell {
         this.y = Y;
         this.state = Math.round(Math.random());
         this.next = 2;
+        this.color = on;
         // this.state = 0;
     }
     update (i,j) {
@@ -40,10 +41,23 @@ class Cell {
         else if(!cur && n==3) this.next = 1;
     }
     draw () {
+        var remain = 0;
         if(this.next == 2) this.next = this.state;
+        else if(this.state && this.state == this.next) remain = 1; 
         this.state = this.next;
+        if(this.next==2) this.state ? ctx.fillStyle = on : ctx.fillStyle = off;
+        else if(!this.state) ctx.fillStyle = off;
+        else if(remain) ctx.fillStyle = this.color;
+        else {
+            var hue = (Math.floor(Date.now() / 50))%360;
+            // console.log(hue);
+            var c = 'hsl('+ hue +',50%,50%)';
+            
+            // var c = on;
+            ctx.fillStyle =  c;
+            this.color = c;
+        }
         this.next = 0;
-        this.state ? ctx.fillStyle = on : ctx.fillStyle = off;
         ctx.fillRect(this.x,this.y,w,w);
     }
     random () {
