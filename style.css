@@ -13,7 +13,6 @@ body {
     left: 20px;
     top: 20px;
 
-    background-color: aliceblue;
     border: 2px solid brown;
 
     padding: 16px;
@@ -24,7 +23,7 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: small;
     overflow: hidden;
-    transition: width 1s, height 1s;
+    transition: width 1s, height 1s, background-color 1s;
 }
 
 .inner {
@@ -37,6 +36,7 @@ body {
     height: 130px;
     width: 140px;
     border-radius: 20px;
+    background-color: aliceblue;
 }
 
 .on > * {
@@ -47,6 +47,7 @@ body {
     height: 10px;
     width: 10px;
     border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .off > * {
