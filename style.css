@@ -1,7 +1,67 @@
 body {
-    background-color: rgb(21, 2, 51);
+    /* background-color: rgb(21, 2, 51); */
+    background-color: white;
     margin: 0px;
     padding: 0px;
 
     overflow: hidden;
+}
+
+#controller {
+    z-index: 100;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+
+    background-color: aliceblue;
+    border: 2px solid brown;
+
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    overflow: hidden;
+    transition: width 1s, height 1s;
+}
+
+.inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.on {
+    height: 130px;
+    width: 140px;
+    border-radius: 20px;
+}
+
+.on > * {
+    visibility: visible;
+}
+
+.off {
+    height: 10px;
+    width: 10px;
+    border-radius: 30px;
+}
+
+.off > * {
+    visibility: hidden;
+}
+
+.left {
+    color:brown;
+}
+
+.right {
+    padding: 1px 2px 1px 2px;
+}
+
+.right:hover {
+    background-color: brown;
+    color: antiquewhite;
 }
