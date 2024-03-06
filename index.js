@@ -197,7 +197,7 @@ var toggle = 1;
 function Key_Spacebar () {
     console.log("TOGGLE : ",toggle);
     if(toggle) {
-        timer = setInterval(updateArray,5);
+        timer = setInterval(updateArray,50);
         if(theme1=='white') document.body.style.backgroundColor = 'white';
         else document.body.style.backgroundColor = 'black';
     }
@@ -296,8 +296,7 @@ document.addEventListener("keypress", function(event) {
     else console.log("KEY : ",event.keyCode);
 });
 
-var controller = document.getElementById("controller");
-controller.addEventListener('click',function(event) {
+function toggleController(event) {
     if(event.target.classList.contains('right')) return;
     if(controller.classList.contains('on')) {
         controller.classList.remove('on');
@@ -307,6 +306,11 @@ controller.addEventListener('click',function(event) {
         controller.classList.remove('off');
         controller.classList.add('on');
     };
+};
+
+var controller = document.getElementById("controller");
+controller.addEventListener('click',function(event) {
+    toggleController(event);
 });
 
 document.getElementById('Spacebar').addEventListener('click',Key_Spacebar);
@@ -316,3 +320,51 @@ document.getElementById('Machines').addEventListener('click',Key_Machines);
 document.getElementById('Map').addEventListener('click',Key_Map);
 document.getElementById('Light').addEventListener('click',Key_Light);
 document.getElementById('Dark').addEventListener('click',Key_Dark);
+
+var isContDragging = false;
+var dragOffsetX, dragOffsetY;
+
+// Function to start the dragging
+function startDrag(e) {
+    // Use 'touches[0]' for touch events and 'e' for mouse events
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    isContDragging = true;
+    dragOffsetX = clientX - controller.getBoundingClientRect().left;
+    dragOffsetY = clientY - controller.getBoundingClientRect().top;
+    controller.style.cursor = 'grabbing';
+}
+
+// Function to perform the dragging
+function doDrag(e) {
+    if (!isContDragging) return;
+    // Prevent the default touch action to avoid scrolling during drag
+    e.preventDefault();
+
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    controller.style.left = (clientX - dragOffsetX) + 'px';
+    controller.style.top = (clientY - dragOffsetY) + 'px';
+    // Call toggleController here if necessary, ensure it's compatible with touch
+    // toggleController(e);
+}
+
+// Function to end the dragging
+function endDrag() {
+    if (isContDragging) {
+        isContDragging = false;
+        controller.style.cursor = 'pointer';
+    }
+}
+
+// Attach mouse event listeners
+controller.addEventListener('mousedown', startDrag);
+document.addEventListener('mousemove', doDrag);
+document.addEventListener('mouseup', endDrag);
+
+// Attach touch event listeners
+controller.addEventListener('touchstart', startDrag, {passive: false});
+document.addEventListener('touchmove', doDrag, {passive: false});
+document.addEventListener('touchend', endDrag);
